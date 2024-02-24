@@ -29,7 +29,8 @@ def login():
             st.session_state['usuario'] = usuario
             st.success("Has iniciado sesión correctamente.")
             #switch_page("unir_pdfs")
-            page_pdf()
+            #page_pdf()
+            return True
         else:
             st.error("Credenciales incorrectas.")
 
@@ -37,7 +38,8 @@ def login():
 def main():
     # Verificar si el usuario está autenticado
     if 'autenticado' not in st.session_state or not st.session_state['autenticado']:
-        login()
+        if login():
+            page_pdf()
     else:
         # Usuario autenticado
         st.success(f"Bienvenido de nuevo, {st.session_state['usuario']}")
