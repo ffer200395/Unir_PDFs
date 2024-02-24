@@ -1,5 +1,5 @@
 import streamlit as st 
-import PyPDF2
+from streamlit_extras.switch_page_button import switch_page
 
 # Función de verificación de credenciales
 def verificar_credenciales(usuario, password):
@@ -31,6 +31,7 @@ def main():
                 st.session_state['autenticado'] = True
                 st.session_state['usuario'] = usuario
                 st.success("Has iniciado sesión correctamente.")
+                switch_page("unir_pdfs")
             else:
                 st.error("Credenciales incorrectas.")
     else:
