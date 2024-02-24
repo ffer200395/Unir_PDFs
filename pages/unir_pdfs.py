@@ -13,7 +13,7 @@ def unir_pdfs(output_path, documents):
 st.image("assets/combine-pdf.png")
 st.header("Unir PDF")
 st.subheader("Adjuntar pdfs para unir")
-
+print(st.session_state['autenticado'])
 pdf_adjuntos = st.file_uploader(label="", accept_multiple_files=True)
 
 unir = st.button(label= "Unir PDFs")
