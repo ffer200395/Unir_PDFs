@@ -30,6 +30,11 @@ if unir:
 
 # Botón de cierre de sesión
 if st.button("Cerrar sesión"):
-    del st.session_state['autenticado']
-    del st.session_state['usuario']
+    #del st.session_state['autenticado']
+    #del st.session_state['usuario']
+    # Verificar si la clave existe antes de intentar eliminarla
+    if 'autenticado' in st.session_state:
+        del st.session_state['autenticado']
+    if 'usuario' in st.session_state:
+        del st.session_state['usuario']
     st.experimental_rerun()
