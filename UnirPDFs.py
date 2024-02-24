@@ -14,28 +14,30 @@ def verificar_credenciales(usuario, password):
         return valid_pwd==password
     return False
 
-# Interfaz de Streamlit
-def main():
+def login():
     # Título
     st.title("Sistema de XXX con Autenticación")
+    # Solicitar usuario y contraseña
+    usuario = st.text_input("Nombre de usuario")
+    password = st.text_input("Contraseña", type="password")
 
+    # Botón para iniciar sesión
+    if st.button("Iniciar sesión"):
+        # Verificación de credenciales
+        if verificar_credenciales(usuario, password):
+            st.session_state['autenticado'] = True
+            st.session_state['usuario'] = usuario
+            st.success("Has iniciado sesión correctamente.")
+            #switch_page("unir_pdfs")
+            page_pdf()
+        else:
+            st.error("Credenciales incorrectas.")
+
+# Interfaz de Streamlit
+def main():
     # Verificar si el usuario está autenticado
     if 'autenticado' not in st.session_state or not st.session_state['autenticado']:
-        # Solicitar usuario y contraseña
-        usuario = st.text_input("Nombre de usuario")
-        password = st.text_input("Contraseña", type="password")
-
-        # Botón para iniciar sesión
-        if st.button("Iniciar sesión"):
-            # Verificación de credenciales
-            if verificar_credenciales(usuario, password):
-                st.session_state['autenticado'] = True
-                st.session_state['usuario'] = usuario
-                st.success("Has iniciado sesión correctamente.")
-                #switch_page("unir_pdfs")
-                page_pdf()
-            else:
-                st.error("Credenciales incorrectas.")
+        login()
     else:
         # Usuario autenticado
         st.success(f"Bienvenido de nuevo, {st.session_state['usuario']}")
